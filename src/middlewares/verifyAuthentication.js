@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 const { JWT_SECRET } = require('../configs/env');
 
+
 const requiSignin = (req, res, next) => {
     const { authorization } = req.headers;
 
@@ -27,10 +28,11 @@ const requiSignin = (req, res, next) => {
         req.user = decoded;
     
         return next();
-    })
+    });
 
 }
 
+// Verifica se é um usuário admin
 const verifyAdmin = (req, res, next) => {
     const { role } = req.user;
 
@@ -45,6 +47,7 @@ const verifyAdmin = (req, res, next) => {
 
 }
 
+// verifica se é um usuário comum
 const verifyUser = (req, res, next) => {
     const { role } = req.user;
 
